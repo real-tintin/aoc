@@ -1,0 +1,2 @@
+[env]
+INPUTS_ROOT = { value = "inputs", relative = true }
