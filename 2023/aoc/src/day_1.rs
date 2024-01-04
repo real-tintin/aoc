@@ -1,16 +1,12 @@
 use std::collections::VecDeque;
 
+use crate::types::Part;
+
 const DIGIT_AS_STR_MAX_LEN: usize = 5; // E.g., "one" or "three".
 
-pub fn part_1(input: std::path::PathBuf) -> u32 {
-    solve(input, false)
-}
+pub fn solve(input: std::path::PathBuf, part: Part) -> u32 {
+    let support_digits_as_strings = if part == Part::One { false } else { true };
 
-pub fn part_2(input: std::path::PathBuf) -> u32 {
-    solve(input, true)
-}
-
-fn solve(input: std::path::PathBuf, support_digits_as_strings: bool) -> u32 {
     let file = std::fs::read_to_string(input).unwrap();
     let lines = file.lines();
 
@@ -47,8 +43,7 @@ fn solve(input: std::path::PathBuf, support_digits_as_strings: bool) -> u32 {
         }
 
         if first.is_none() {
-            log::warn!("No digits found in line: {}", line);
-            continue;
+            panic!("No digits found in line: {}", line);
         }
 
         if last.is_none() {
@@ -127,16 +122,16 @@ fn str_to_digit(as_str: &String) -> Option<u32> {
 
 #[cfg(test)]
 mod tests {
-    use super::{part_1, part_2};
-    use crate::utils::test_utils::get_input_path;
+    use super::{solve, Part};
+    use crate::utils::test::get_input_path;
 
     #[test]
-    fn test_part_1() {
-        assert_eq!(part_1(get_input_path(1)), 53080);
+    fn solve_part_one() {
+        assert_eq!(solve(get_input_path(1), Part::One), 53080);
     }
 
     #[test]
-    fn test_part_2() {
-        assert_eq!(part_2(get_input_path(1)), 53268);
+    fn solve_part_two() {
+        assert_eq!(solve(get_input_path(1), Part::Two), 53268);
     }
 }
