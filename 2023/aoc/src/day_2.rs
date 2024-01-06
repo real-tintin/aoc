@@ -127,7 +127,7 @@ impl Game {
 }
 
 pub fn solve(input: std::path::PathBuf, part: Part) -> u32 {
-    let return_sum_of_powers = if part == Part::One { false } else { true };
+    let return_sum_of_powers = part != Part::One;
 
     let file = std::fs::read_to_string(input).unwrap();
     let lines = file.lines();

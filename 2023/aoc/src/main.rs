@@ -24,7 +24,6 @@ struct Args {
 }
 
 fn main() {
-    let ret: u32;
     let args = Args::parse();
 
     if args.verbose {
@@ -41,11 +40,11 @@ fn main() {
             .init();
     }
 
-    match args.day {
-        1 => ret = day_1::solve(args.input, args.part),
-        2 => ret = day_2::solve(args.input, args.part),
+    let ret = match args.day {
+        1 => day_1::solve(args.input, args.part),
+        2 => day_2::solve(args.input, args.part),
         _ => panic!("Day not implemented"),
-    }
+    };
 
     println!("{}", ret);
 }

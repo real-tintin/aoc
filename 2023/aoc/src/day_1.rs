@@ -5,7 +5,7 @@ use crate::types::Part;
 const DIGIT_AS_STR_MAX_LEN: usize = 5; // E.g., "one" or "three".
 
 pub fn solve(input: std::path::PathBuf, part: Part) -> u32 {
-    let support_digits_as_strings = if part == Part::One { false } else { true };
+    let support_digits_as_strings = part != Part::One;
 
     let file = std::fs::read_to_string(input).unwrap();
     let lines = file.lines();
@@ -62,7 +62,7 @@ fn str_to_digit(as_str: &String) -> Option<u32> {
     match as_str.len() {
         3 => {
             if as_str == "one" {
-                return Some(1);
+                Some(1)
             } else if as_str == "two" {
                 return Some(2);
             } else if as_str == "six" {
@@ -75,7 +75,7 @@ fn str_to_digit(as_str: &String) -> Option<u32> {
             let as_str_three_last = &as_str[1..];
 
             if as_str_three_last == "one" {
-                return Some(1);
+                Some(1)
             } else if as_str_three_last == "two" {
                 return Some(2);
             } else if as_str_three_last == "six" {
@@ -95,7 +95,7 @@ fn str_to_digit(as_str: &String) -> Option<u32> {
             let as_str_four_last = &as_str[1..];
 
             if as_str_three_last == "one" {
-                return Some(1);
+                Some(1)
             } else if as_str_three_last == "two" {
                 return Some(2);
             } else if as_str_three_last == "six" {
@@ -116,7 +116,7 @@ fn str_to_digit(as_str: &String) -> Option<u32> {
                 return None;
             }
         }
-        _ => return None,
+        _ => None,
     }
 }
 

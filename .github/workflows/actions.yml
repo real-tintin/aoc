@@ -13,5 +13,8 @@ jobs:
         name: Build package
         run: cd 2023/aoc && cargo build --release
       -
+        name: Run linter
+        run: cd 2023/aoc && cargo clippy
+      -
         name: Run tests
         run: cd 2023/aoc && cargo test
