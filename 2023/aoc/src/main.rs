@@ -26,19 +26,17 @@ struct Args {
 fn main() {
     let args = Args::parse();
 
-    if args.verbose {
-        env_logger::builder()
-            .filter_level(log::LevelFilter::Debug)
-            .format_target(false)
-            .format_timestamp(None)
-            .init();
+    let log_level = if args.verbose {
+        log::LevelFilter::Debug
     } else {
-        env_logger::builder()
-            .filter_level(log::LevelFilter::Info)
-            .format_target(false)
-            .format_timestamp(None)
-            .init();
-    }
+        log::LevelFilter::Info
+    };
+
+    env_logger::builder()
+        .filter_level(log_level)
+        .format_target(false)
+        .format_timestamp(None)
+        .init();
 
     let ret = match args.day {
         1 => day_1::solve(args.input, args.part),
