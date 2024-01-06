@@ -16,19 +16,15 @@ struct Args {
     #[arg(short, long)]
     day: u8,
 
-    #[arg(short, long)]
-    part: u8,
+    #[arg(short, long, value_parser = clap::value_parser!(Part))]
+    part: Part,
 
     #[arg(short, long)]
     verbose: bool,
 }
 
-type Solve = fn(input: std::path::PathBuf, part: Part) -> u32;
-
 fn main() {
-    let solve: Solve;
     let ret: u32;
-
     let args = Args::parse();
 
     if args.verbose {
@@ -46,15 +42,9 @@ fn main() {
     }
 
     match args.day {
-        1 => solve = day_1::solve,
-        2 => solve = day_2::solve,
+        1 => ret = day_1::solve(args.input, args.part),
+        2 => ret = day_2::solve(args.input, args.part),
         _ => panic!("Day not implemented"),
-    }
-
-    match args.part {
-        1 => ret = solve(args.input, Part::One),
-        2 => ret = solve(args.input, Part::Two),
-        _ => panic!("Part not supported"),
     }
 
     println!("{}", ret);
