@@ -6,6 +6,7 @@ use crate::types::Part;
 mod day_1;
 mod day_2;
 mod day_3;
+mod day_4;
 mod types;
 mod utils;
 
@@ -43,6 +44,7 @@ fn main() {
         1 => day_1::solve(args.input, args.part),
         2 => day_2::solve(args.input, args.part),
         3 => day_3::solve(args.input, args.part),
+        4 => day_4::solve(args.input, args.part),
         _ => panic!("Day not implemented"),
     };
 
